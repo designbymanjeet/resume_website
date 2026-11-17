@@ -1,0 +1,210 @@
+/* Variables: neutrals, ONE accent colour (links and buttons only), fonts and one spacing scale */
+:root {
+  --bg: #F5F0E8;
+  --text: #141414;
+  --text-2: #4A4A4A;
+  --line: #D9D0C0;
+  --paper: #FFFFFF;
+  --accent: #1F3A5F;
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans: "DM Sans", Arial, sans-serif;
+  --s1: 8px;
+  --s2: 24px;
+  --s3: 64px;
+  --edge: 32px;
+}
+
+/* Base elements: page background, body text, headings, paragraphs, lists */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+}
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: var(--s2) 0 var(--s1);
+}
+h2 { font-size: clamp(2rem, 5vw, 3rem); }
+h3 { font-size: 1.5rem; }
+p, li { max-width: 70ch; }
+p { margin: 0 0 var(--s1); }
+ul { margin: 0; padding-left: 1.25rem; }
+li { margin-bottom: var(--s1); }
+strong { font-weight: 700; }
+
+/* Links: accent colour, colour-only hover, visible keyboard focus */
+a { color: var(--accent); transition: color 0.2s, background-color 0.2s; }
+a:hover { color: var(--text); }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Buttons (.button, .button-outline): filled and outlined, at least 44px tall */
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s2);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--paper);
+  font-weight: 500;
+  text-decoration: none;
+}
+.button:hover { background: var(--text); border-color: var(--text); color: var(--paper); }
+.button-outline { background: transparent; color: var(--accent); }
+.button-outline:hover { background: var(--accent); border-color: var(--accent); }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s1); margin: var(--s2) 0; }
+
+/* Navigation bar (header, .nav): flexbox, stays at the top so Get in touch is always one click away */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s1) var(--s2);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--s1) var(--edge);
+}
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav-links li { margin: 0; }
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s1);
+  color: var(--text);
+  text-decoration: none;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* Sections: shared width, spacing and scroll offset for the sticky nav */
+main > section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--s3) var(--edge);
+  scroll-margin-top: 72px;
+}
+main h2:first-child { margin-top: 0; }
+.split { display: grid; grid-template-columns: 1fr 2fr; gap: var(--s2); }
+.split h2 { margin: 0; }
+
+/* Hero (#hero): large name on the left, intro and buttons pushed to the right column */
+#hero { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s2); }
+#hero h1 {
+  grid-column: 1 / -1;
+  margin: 0 0 var(--s2);
+  font-size: clamp(3.5rem, 12vw, 9rem);
+  line-height: 0.95;
+}
+#hero p, #hero .actions { grid-column: 2; }
+#hero .lead { font-size: 1.5rem; line-height: 1.35; }
+
+/* About (#about) and Skills (#skills): small heading left, wider text right (uses .split) */
+#about p, #skills li { margin-bottom: var(--s2); }
+
+/* Experience (#experience) and flat cards (.card): thin full outline, no shadow, no side stripe */
+#experience .cards { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); margin-top: var(--s2); }
+.card { padding: var(--s2); border: 1px solid var(--line); }
+.card > :first-child { margin-top: 0; }
+.card-wide { grid-column: 1 / -1; }
+.meta { color: var(--text-2); margin-bottom: var(--s2); }
+
+/* Selected Work (#work): one flat box in the right column */
+#work { display: grid; grid-template-columns: 1fr 2fr; gap: var(--s2); }
+#work .card { grid-column: 2; }
+
+/* Resume (#resume): white paper sheet on the beige page */
+.sheet {
+  max-width: 210mm;
+  margin-top: var(--s2);
+  padding: var(--s3);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.sheet-name { margin: 0; font-size: 2.5rem; }
+.sheet-title { font-size: 1.25rem; margin-bottom: var(--s1); }
+.sheet h4 {
+  margin: var(--s2) 0 var(--s1);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sheet .meta { margin-bottom: var(--s1); }
+.sheet li { margin-bottom: 4px; }
+.entry { margin-bottom: var(--s2); }
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 var(--s2);
+  max-width: none;
+  margin: 0;
+}
+
+/* Contact (#contact): intro left, panel with email buttons and links right (uses .split and .card) */
+#contact .card .actions { margin-top: 0; }
+
+/* Phones: one @media rule for screens narrower than 700px, stacks everything into one column */
+@media (max-width: 699px) {
+  :root { --edge: 16px; --s3: 40px; }
+  header { position: static; }
+  .split, #hero, #work, #experience .cards { grid-template-columns: 1fr; }
+  #hero p, #hero .actions, #work .card { grid-column: 1; }
+  .sheet { padding: var(--s2); }
+}
+
+/* Reduced motion: turn off the hover colour transitions */
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+}
+
+/* Print: only #resume, one A4 page, black text on white */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  header, main > section:not(#resume), .no-print { display: none; }
+  body { background: #fff; color: #000; font-size: 9pt; line-height: 1.3; }
+  main > section#resume { max-width: none; margin: 0; padding: 0; }
+  .sheet { max-width: none; margin: 0; padding: 0; border: 0; font-size: 9pt; line-height: 1.3; }
+  .sheet-name { font-size: 22pt; }
+  .sheet-title { font-size: 11pt; }
+  .sheet h4 { margin: 10px 0 4px; font-size: 8pt; }
+  .sheet p, .sheet li { max-width: none; color: #000; }
+  .sheet li { margin-bottom: 2px; }
+  .sheet .meta { color: #000; margin-bottom: 2px; }
+  .entry { margin-bottom: 8px; }
+  .sheet a { color: #000; text-decoration: none; }
+}
